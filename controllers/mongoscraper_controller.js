@@ -3,16 +3,20 @@
 var express = require("express");
 var router = express.Router();
 // Require all models
-var db = require("../models");
+// var db = require("../models");
 
 // Our scraping tools
 // Axios is a promised-based http library, similar to jQuery's Ajax method
 // It works on the client and on the server
 var axios = require("axios");
 var cheerio = require("cheerio");
+var Note = require("../models/Note.js");
+var Article = require("../models/Article.js");
+
+
 
 router.get("/", function (req, res) {
-    db.Article.find({ "saved": false }, function (error, data) {
+    Article.find({ "saved": false }, function (error, data) {
         var hbsObject = {
             article: data
         };
@@ -21,13 +25,14 @@ router.get("/", function (req, res) {
 });
 
 router.get("/saved", function (req, res) {
-    db.Article.find({ "saved": true }, function (error, data2) {
+    Article.find({ "saved": true }).populate("note").exec(function (error, article2) {
         var hbsObject = {
-            article: data2
+            article: article2
         };
+        console.log(hbsObject);
         res.render("saved", hbsObject);
     });
-});
+})
 
 
 router.get("/scrape", function (req, res) {
@@ -51,7 +56,7 @@ router.get("/scrape", function (req, res) {
                 .attr("href");
 
             // Create a new Article using the `result` object built from scraping
-            db.Article.create(result)
+            Article.create(result)
                 .then(function (dbArticle) {
                     // View the added result in the console
                     console.log(dbArticle);
@@ -70,7 +75,21 @@ router.get("/scrape", function (req, res) {
 // Route for getting all Articles from the db
 router.get("/api/getarticles", function (req, res) {
     // Grab every document in the Articles collection
-    db.Article.find({})
+    Article.find({})
+        .then(function (dbArticle) {
+            // If we were able to successfully find Articles, send them back to the client
+            res.json(dbArticle);
+        })
+        .catch(function (err) {
+            // If an error occurred, send it to the client
+            res.json(err);
+        });
+});
+
+router.get("/api/getarticles/:id", function (req, res) {
+    // Grab every document in the Articles collection
+    Article.findOne({ _id: req.params.id })
+        .populate("note")
         .then(function (dbArticle) {
             // If we were able to successfully find Articles, send them back to the client
             res.json(dbArticle);
@@ -82,30 +101,37 @@ router.get("/api/getarticles", function (req, res) {
 });
 
 
-// Route for saving/updating an Article's associated Note
-router.post("/api/savedarticles/:id", function (req, res) {
-    // Create a new note and pass the req.body to the entry
-    db.Article.findOneAndUpdate({ _id: req.params.id }, { saved: true })
-        // ..and populate all of the notes associated with it
-        // .then(function (dbArticle) {
-        //     // If we were able to successfully find an Article with the given id, send it back to the client
-        //     res.json(dbArticle);
-        // })
-        // .catch(function (err) {
-        //     // If an error occurred, send it to the client
-        //     res.json(err);
-        // });
-        .exec(function (err, doc) {
-            // Log any errors
-            if (err) {
-                console.log(err);
-            }
-            else {
-                // Or send the document to the browser
-                res.send(doc);
-            }
+//Save an article
+router.post("/api/savearticle/:id", function (req, res) {
+    Article.findByIdAndUpdate({ _id: req.params.id }, { saved: true })
+        .then(function (dbArticle) {
+            // If we were able to successfully find an Article with the given id, send it back to the client
+            res.json(dbArticle);
+        })
+        .catch(function (err) {
+            // If an error occurred, send it to the client
+            res.json(err);
         });
 });
 
+router.get("/api/savenote/note/:id", function(req, res) {
+	var id = req.params.id;
+	Article.findById(id).populate("note").exec(function(err, data) {
+		res.send(data.note);
+	})
+})
+
+router.post("/api/savenote/:id", function (req, res) {
+    var note = new Note(req.body);
+	note.save(function(err, doc) {
+		if (err) throw err;
+		Article.findByIdAndUpdate(req.params.id, {$set: {"note": doc._id}}, {new: true}, function(err, doc) {
+			if (err) throw err;
+			else {
+				res.send(doc);
+			}
+		});
+    });
+});
 // Export routes for server.js to use.
 module.exports = router;

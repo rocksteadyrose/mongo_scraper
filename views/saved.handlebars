@@ -1,34 +1,35 @@
-  <div id="wrapper">
+<div id="wrapper">
 
-    <ul class="nav">
-      <li class="nav-item">
-        <a href="/" class="nav-link navbar-brand active">Mongo Scraper</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link">Saved Articles</a>
-      </li>
+  <ul class="nav">
+    <li class="nav-item">
+      <a href="/" class="nav-link navbar-brand active">Mongo Scraper</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link">Saved Articles</a>
+    </li>
+  </ul>
 
+  <div class="jumbotron">
+    <h1 class="display-4">MONGO SCRAPER</h1>
+    <p class="lead">CNN EDITION</p>
+    <hr class="my-4">
+    <p class="lead">
 
-    </ul>
-
-    <div class="jumbotron">
-      <h1 class="display-4">MONGO SCRAPER</h1>
-      <p class="lead">CNN EDITION</p>
-      <hr class="my-4">
-      <p class="lead">
-
-      </p>
-    </div>
-
-    <div class="articles">
-    {{#if article}} {{#each article}} {{this.title}} {{this.summary}} {{this.link}}
+    </p>
   </div>
-  {{/each}}
 
-{{else}}
+
+  <div class="articles">
+    {{#if article}} {{#each article}} {{this.title}} {{this.summary}} {{this.link}}
+    <button type="button" class="btn btn-success notesButton" data-id={{this._id}} data-toggle="modal" data-target="#notesModal{{this._id}}">Article Notes</button>
+    <button type="button" class="btn btn-success deleteButton" data-id={{this._id}}>Delete From Saved</button>
+
+  </div>
+  {{/each}} {{else}}
   <div class="noArticles">
     Uh, oh. Looks like we don't have any saved articles.
   </div>
   {{/if}}
 
-  </div>
+</div>
+{{#each article}} {{> notes }} {{/each}}

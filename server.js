@@ -3,6 +3,7 @@ var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var logger = require("morgan");
 var exphbs = require("express-handlebars");
+var path = require("path");
 
 var PORT = 3000;
 
@@ -16,7 +17,9 @@ app.use(logger("dev"));
 app.use(bodyParser.urlencoded({ extended: true }));
 // Use express.static to serve the public folder as a static directory
 app.use(express.static("public"));
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.engine("handlebars", exphbs({ defaultLayout: "main",
+partialsDir: path.join(__dirname, "/views/layouts/partials")
+ }));
 // We set this as the view engine bc Handlebars is controlling what the users see
 app.set("view engine", "handlebars");
 
