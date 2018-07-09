@@ -12,6 +12,7 @@
                  {{#if this.note}} {{#each this.note}}
                 <p class="notessection">
                     {{this.body}}
+                    <button type="button" class="deleteNote" >X</button>
                 </p>
                 {{/each}}{{/if}} New Note
                 <textarea rows="4" cols="20" id="note{{this._id}}"></textarea>
@@ -19,7 +20,6 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn saveNotesButton" data-id={{this._id}}>Save</button>
-                <button type="button" class="btn closebutton" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
