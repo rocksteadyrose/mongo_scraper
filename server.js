@@ -36,13 +36,7 @@ app.listen(PORT, function () {
 });
 
 
-// Routes
-// Require all models
-// var db = require("../models");
-
 // Our scraping tools
-// Axios is a promised-based http library, similar to jQuery's Ajax method
-// It works on the client and on the server
 var cheerio = require("cheerio");
 var Note = require("./models/Note.js");
 var Article = require("./models/Article.js");
@@ -68,77 +62,61 @@ app.get("/saved", function (req, res) {
 
 
 app.get("/scrape", function (req, res) {
-  // First, we grab the body of the html with request
-  request("https://www.cnn.com/entertainment", function (error, response, html) {
-    // Then, we load that into cheerio and save it to $ for a shorthand selector
+  request("https://www.buzzfeed.com/animals", function (error, response, html) {
     var $ = cheerio.load(html);
-
-    // Now, we grab every h2 within an article tag, and do the following:
-    $(".cd__headline").each(function (i, element) {
-      // Save an empty result object
+    $(".sm-pl05").each(function (i, element) {
       var result = {};
-
-      // Add the text and href of every link, and save them as properties of the result object
       result.title = $(this)
-        .children("a")
-        .text();
-      result.summary = $(this).children(".summary").text();
+      .children("a")
+      .text();
+      
+      result.summary = $(this)
+      $('.sm-text-2').nextAll('js-card__description')
+.html();
+
       result.link = $(this)
         .children("a")
         .attr("href");
-
-      // Create a new Article using the `result` object built from scraping
       Article.create(result)
         .then(function (dbArticle) {
-          // View the added result in the console
           console.log(dbArticle);
         })
         .catch(function (err) {
-          // If an error occurred, send it to the client
           return res.json(err);
         });
     });
-
-    // If we were able to successfully scrape and save an Article, send a message to the client
     res.send("Scrape Complete");
   });
 });
 
 // Route for getting all Articles from the db
 app.get("/api/getarticles", function (req, res) {
-  // Grab every document in the Articles collection
   Article.find({})
     .then(function (dbArticle) {
-      // If we were able to successfully find Articles, send them back to the client
       res.json(dbArticle);
     })
     .catch(function (err) {
-      // If an error occurred, send it to the client
       res.json(err);
     });
 });
 
 //Delete all articles
 app.delete("/api/deletearticles/", function (req, res) {
-  // Grab every document in the Articles collection
   Article
-  .remove({})
-  .then(function(dbArticle){
-    res.json(dbArticle)
-  })
+    .remove({})
+    .then(function (dbArticle) {
+      res.json(dbArticle)
+    })
 });
 
+//Get an article
 app.get("/api/getarticles/:id", function (req, res) {
-  // Grab every document in the Articles collection
   Article.findOne({ _id: req.params.id })
     .populate("note")
-    // now, execute our query
     .exec(function (error, doc) {
-      // Log any errors
       if (error) {
         console.log(error);
       }
-      // Otherwise, send the doc to the browser as a json object
       else {
         res.json(doc);
       }
@@ -147,44 +125,35 @@ app.get("/api/getarticles/:id", function (req, res) {
 
 //Delete an article
 app.delete("/api/deletearticle/:id", function (req, res) {
-  // Grab every document in the Articles collection
   Article
-  .remove({_id:req.params.id})
-  .then(function(dbArticle){
-    res.json(dbArticle)
-  })
+    .remove({ _id: req.params.id })
+    .then(function (dbArticle) {
+      res.json(dbArticle)
+    })
 });
 
 
-//Save an article
+//Save article
 app.post("/api/savearticle/:id", function (req, res) {
-  // Use the article id to find and update its saved boolean
   Article.findOneAndUpdate({ _id: req.params.id }, { "saved": true })
-    // Execute the above query
     .exec(function (err, doc) {
-      // Log any errors
       if (err) {
         console.log(err);
       }
       else {
-        // Or send the document to the browser
         res.send(doc);
       }
     });
 });
 
-//Delete a saved article
+//Delete saved article
 app.post("/api/deletesavearticle/:id", function (req, res) {
-  // Use the article id to find and update its saved boolean
   Article.findOneAndUpdate({ _id: req.params.id }, { "saved": false })
-    // Execute the above query
     .exec(function (err, doc) {
-      // Log any errors
       if (err) {
         console.log(err);
       }
       else {
-        // Or send the document to the browser
         res.send(doc);
       }
     });
@@ -200,35 +169,27 @@ app.get("/api/savenote/:id", function (req, res) {
 
 //Create a new note
 app.post("/api/savenote/:id", function (req, res) {
-  // Create a new note and pass the req.body to the entry
   var newNote = new Note({
     body: req.body.text,
     article: req.params.id
   });
   console.log(req.body)
-  // And save the new note the db
   newNote.save(function (error, note) {
-    // Log any errors
     if (error) {
       console.log(error);
     }
-    // Otherwise
     else {
-      // Use the article id to find and update it's notes
-      Article.findOneAndUpdate({ _id: req.params.id }, {$push: { note: note }})
+      Article.findOneAndUpdate({ _id: req.params.id }, { $push: { note: note } })
 
-      // Execute the above query
-      .exec(function (err) {
-        // Log any errors
-        if (err) {
-          console.log(err);
-          res.send(err);
-        }
-        else {
-          // Or send the note to the browser
-          res.send(note);
-        }
-      });
+        .exec(function (err) {
+          if (err) {
+            console.log(err);
+            res.send(err);
+          }
+          else {
+            res.send(note);
+          }
+        });
     }
   });
 });
@@ -237,24 +198,20 @@ app.post("/api/savenote/:id", function (req, res) {
 //Delete a note
 app.delete("/api/deletenote/:id", function (req, res) {
   Note
-  .remove({"_id":req.params.id})
-  .then(function(dbArticle){
-    res.json(dbArticle)
-  })
+    .remove({ "_id": req.params.id })
+    .then(function (dbArticle) {
+      res.json(dbArticle)
+    })
 });
 
 //Delete a saved article
 app.post("/api/deletesavearticle/:id", function (req, res) {
-  // Use the article id to find and update its saved boolean
   Article.findOneAndUpdate({ _id: req.params.id }, { "saved": false })
-    // Execute the above query
     .exec(function (err, doc) {
-      // Log any errors
       if (err) {
         console.log(err);
       }
       else {
-        // Or send the document to the browser
         res.send(doc);
       }
     });

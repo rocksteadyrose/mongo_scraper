@@ -10,10 +10,7 @@ $(document).on("click", ".scrapebutton", function () {
 
 //Save articles
 $(document).on("click", ".saveButton", function () {
-    // Save the id from the saved note
     var savedArticleId = $(this).attr("data-id");
-
-    // Now make an ajax call for the Article
     $.ajax({
         method: "post",
         url: "/api/savearticle/" + savedArticleId,
@@ -25,7 +22,6 @@ $(document).on("click", ".saveButton", function () {
 
 //Delete all articles
 $(document).on("click", ".deleteAllButton", function () {
-    // Now make an ajax call for the Article
     $.ajax({
         method: "DELETE",
         url: "/api/deletearticles/",
@@ -37,10 +33,7 @@ $(document).on("click", ".deleteAllButton", function () {
 
 //Delete an article
 $(document).on("click", ".deleteButton", function () {
-    // Save the id from the saved note
     var deleteArticleId = $(this).attr("data-id");
-
-    // Now make an ajax call for the Article
     $.ajax({
         method: "DELETE",
         url: "/api/deletearticle/" + deleteArticleId,
@@ -52,10 +45,8 @@ $(document).on("click", ".deleteButton", function () {
 
 //Delete a saved article
 $(document).on("click", ".deleteArticleButton", function () {
-    // Save the id from the saved note
     var deleteSavedArticleId = $(this).attr("data-id");
 
-    // Now make an ajax call for the Article
     $.ajax({
         method: "post",
         url: "/api/deletesavearticle/" + deleteSavedArticleId,
@@ -67,7 +58,6 @@ $(document).on("click", ".deleteArticleButton", function () {
 
 //Save a note
 $(document).on("click", ".saveNotesButton", function () {
-    // Save the id from the saved note
     var newNoteId = $(this).attr("data-id");
 
     $.ajax({
@@ -78,7 +68,6 @@ $(document).on("click", ".saveNotesButton", function () {
             // created: Date.now()
             }
         }).done(function(data) {
-            // Log the response
             console.log(data);
             $("#note" + newNoteId).val("");
             window.location = "/saved"
@@ -87,14 +76,12 @@ $(document).on("click", ".saveNotesButton", function () {
 
 //Delete a note
 $(document).on("click", ".deleteNote", function () {
-    // Save the id from the saved note
     var deleteNoteId = $(this).attr("data-id");
 
     $.ajax({
         method: "DELETE",
         url: "/api/deletenote/" + deleteNoteId,
         }).done(function(data) {
-            // Log the response
             window.location = "/saved"
         })
 })
