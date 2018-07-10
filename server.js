@@ -4,6 +4,7 @@ var mongoose = require("mongoose");
 var logger = require("morgan");
 var exphbs = require("express-handlebars");
 var path = require("path");
+var request = require('request');
 
 var PORT = 3000;
 
@@ -42,13 +43,12 @@ app.listen(PORT, function () {
 // Our scraping tools
 // Axios is a promised-based http library, similar to jQuery's Ajax method
 // It works on the client and on the server
-var axios = require("axios");
 var cheerio = require("cheerio");
 var Note = require("./models/Note.js");
 var Article = require("./models/Article.js");
 
 app.get("/", function (req, res) {
-  Article.find({ "saved": false }, function (error, data) {
+  Article.find({ "saved": false }).limit(20).exec(function (error, data) {
     var hbsObject = {
       article: data
     };
@@ -69,9 +69,9 @@ app.get("/saved", function (req, res) {
 
 app.get("/scrape", function (req, res) {
   // First, we grab the body of the html with request
-  axios.get("https://www.cnn.com/entertainment").then(function (response) {
+  request("https://www.cnn.com/entertainment", function (error, response, html) {
     // Then, we load that into cheerio and save it to $ for a shorthand selector
-    var $ = cheerio.load(response.data);
+    var $ = cheerio.load(html);
 
     // Now, we grab every h2 within an article tag, and do the following:
     $(".cd__headline").each(function (i, element) {
@@ -118,6 +118,16 @@ app.get("/api/getarticles", function (req, res) {
     });
 });
 
+//Delete all articles
+app.delete("/api/deletearticles/", function (req, res) {
+  // Grab every document in the Articles collection
+  Article
+  .remove({})
+  .then(function(dbArticle){
+    res.json(dbArticle)
+  })
+});
+
 app.get("/api/getarticles/:id", function (req, res) {
   // Grab every document in the Articles collection
   Article.findOne({ _id: req.params.id })
@@ -133,6 +143,16 @@ app.get("/api/getarticles/:id", function (req, res) {
         res.json(doc);
       }
     });
+});
+
+//Delete an article
+app.delete("/api/deletearticle/:id", function (req, res) {
+  // Grab every document in the Articles collection
+  Article
+  .remove({_id:req.params.id})
+  .then(function(dbArticle){
+    res.json(dbArticle)
+  })
 });
 
 

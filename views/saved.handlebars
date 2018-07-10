@@ -22,7 +22,7 @@
   <div class="articles">
     {{#if article}} {{#each article}} {{this.title}} {{this.summary}} {{this.link}}
     <button type="button" class="btn btn-success notesButton" data-id={{this._id}} data-toggle="modal" data-target="#notesModal{{this._id}}">Article Notes</button>
-    <button type="button" class="btn btn-success deleteButton" data-id={{this._id}}>Delete From Saved</button>
+    <button type="button" class="btn btn-success deleteArticleButton" data-id={{this._id}}>Delete From Saved</button>
 
   </div>
   {{/each}} {{else}}

@@ -3,6 +3,9 @@ $(document).on("click", ".scrapebutton", function () {
         method: "GET",
         url: "/scrape",
     })
+    .done(function (data) {
+        window.location = "/"
+    })
 })
 
 //Save articles
@@ -20,8 +23,35 @@ $(document).on("click", ".saveButton", function () {
         })
 })
 
+//Delete all articles
+$(document).on("click", ".deleteAllButton", function () {
+    // Now make an ajax call for the Article
+    $.ajax({
+        method: "DELETE",
+        url: "/api/deletearticles/",
+    })
+    .done(function (data) {
+        window.location = "/"
+    })
+})
+
 //Delete an article
 $(document).on("click", ".deleteButton", function () {
+    // Save the id from the saved note
+    var deleteArticleId = $(this).attr("data-id");
+
+    // Now make an ajax call for the Article
+    $.ajax({
+        method: "DELETE",
+        url: "/api/deletearticle/" + deleteArticleId,
+    })
+    .done(function (data) {
+        window.location = "/"
+    })
+})
+
+//Delete a saved article
+$(document).on("click", ".deleteArticleButton", function () {
     // Save the id from the saved note
     var deleteSavedArticleId = $(this).attr("data-id");
 

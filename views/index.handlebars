@@ -8,13 +8,17 @@
       <a href="/saved" class="nav-link">Saved Articles</a>
     </li>
     <li class="nav-item">
+      <a class="btn btn-primary btn-lg deleteAllButton" role="button">Delete All Articles</a>
+    </li>
+    <li class="nav-item">
       <a class="btn btn-primary btn-lg scrapebutton" role="button" data-toggle="modal" data-target="#scraperModal">SCRAPE</a>
     </li>
+
 
     <div class="modal fade" id="scraperModal">
       <div class="modal-dialog">
         <div class="modal-content">
-          <div class="modal-header"> Added new articles!
+          <div class="modal-header">Added new articles!
 
             <button type="button" class="close" data-dismiss="modal">&times;</button>
           </div>
@@ -37,15 +41,13 @@
     </p>
   </div>
 
-  
+
   <div class="articles">
     {{#if article}} {{#each article}} {{this.title}} {{this.summary}} {{this.link}}
     <button type="button" class="btn btn-success saveButton" data-id={{this._id}}>Save Article</button>
-    <button type="button" class="btn btn-success saveButton" data-id={{this._id}}>Delete Article</button>
+    <button type="button" class="btn btn-success deleteButton" data-id={{this._id}}>Delete Article</button>
   </div>
-  {{/each}}
-
-{{else}}
+  {{/each}} {{else}}
   <div class="noArticles">
     Uh, oh. Looks like we don't have any new articles.
   </div>
