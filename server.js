@@ -170,7 +170,8 @@ app.post("/api/deletesavearticle/:id", function (req, res) {
     });
 });
 
-app.get("/api/savenote/note/:id", function (req, res) {
+//Save a note
+app.get("/api/savenote/:id", function (req, res) {
   var id = req.params.id;
   Article.findById(id).populate("note").exec(function (err, data) {
     res.send(data.note);
@@ -212,3 +213,29 @@ app.post("/api/savenote/:id", function (req, res) {
   });
 });
 
+
+//Delete a note
+app.delete("/api/deletenote/:id", function (req, res) {
+  Note
+  .remove({"_id":req.params.id})
+  .then(function(dbArticle){
+    res.json(dbArticle)
+  })
+});
+
+//Delete a saved article
+app.post("/api/deletesavearticle/:id", function (req, res) {
+  // Use the article id to find and update its saved boolean
+  Article.findOneAndUpdate({ _id: req.params.id }, { "saved": false })
+    // Execute the above query
+    .exec(function (err, doc) {
+      // Log any errors
+      if (err) {
+        console.log(err);
+      }
+      else {
+        // Or send the document to the browser
+        res.send(doc);
+      }
+    });
+});

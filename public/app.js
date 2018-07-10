@@ -55,3 +55,17 @@ $(document).on("click", ".saveNotesButton", function () {
         })
 })
 
+//Delete a note
+$(document).on("click", ".deleteNote", function () {
+    // Save the id from the saved note
+    var deleteNoteId = $(this).attr("data-id");
+
+    $.ajax({
+        method: "DELETE",
+        url: "/api/deletenote/" + deleteNoteId,
+        }).done(function(data) {
+            // Log the response
+            window.location = "/saved"
+        })
+})
+

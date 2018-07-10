@@ -12,14 +12,21 @@
                  {{#if this.note}} {{#each this.note}}
                 <p class="notessection">
                     {{this.body}}
-                    <button type="button" class="deleteNote" >X</button>
+                    <button type="button" class="deleteNote" data-id={{this._id}}>X</button>
                 </p>
-                {{/each}}{{/if}} New Note
+                {{/each}}{{else}}
+                <p class="nonotessection">
+                    No notes yet
+                </p>
+                {{/if}} 
+              
+                New Note
                 <textarea rows="4" cols="20" id="note{{this._id}}"></textarea>
             </div>
 
             <div class="modal-footer">
                 <button type="button" class="btn saveNotesButton" data-id={{this._id}}>Save</button>
+                <button type="button" class="btn cancelButton" data-dismiss="modal" >Cancel</button>
             </div>
         </div>
     </div>
