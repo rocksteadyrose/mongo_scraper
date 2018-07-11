@@ -62,16 +62,17 @@ app.get("/saved", function (req, res) {
 
 
 app.get("/scrape", function (req, res) {
-  request("https://www.buzzfeed.com/animals", function (error, response, html) {
+  request("https://www.thedodo.com/close-to-home", function (error, response, html) {
     var $ = cheerio.load(html);
-    $(".sm-pl05").each(function (i, element) {
+    $(".standard-listing__image").each(function (i, element) {
       var result = {};
+
       result.title = $(this)
-        .children().first()
+        .children("a").children(".standard-listing__caption").children(".standard-listing__title").children(".standard-listing__title-text")
         .text();
 
-      result.summary = $(this)
-      .children().last()
+        result.summary = $(this)
+        .children("a").children(".standard-listing__caption").children(".standard-listing__title").children(".standard-listing__description").children(".standard-listing__subtitle")
         .text();
 
       result.link = $(this)
