@@ -67,16 +67,17 @@ app.get("/scrape", function (req, res) {
     $(".sm-pl05").each(function (i, element) {
       var result = {};
       result.title = $(this)
-      .children("a")
-      .text();
-      
+        .children().first()
+        .text();
+
       result.summary = $(this)
-      $('.sm-text-2').nextAll('js-card__description')
-.html();
+      .children().last()
+        .text();
 
       result.link = $(this)
         .children("a")
         .attr("href");
+
       Article.create(result)
         .then(function (dbArticle) {
           console.log(dbArticle);
