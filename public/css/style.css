@@ -1,0 +1,54 @@
+@font-face {
+    font-family: "kschnauzer";
+    src: url("../fonts/kschnauzer.ttf");
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "puppybellies";
+    src: url("../fonts/puppybellies.ttf");
+    font-weight: normal;
+}
+
+.display-4 {
+    font-family: "kschnauzer", Arial, Helvetica, sans-serif;
+    font-size: 86px;
+}
+
+.eacharticle {
+    margin: 0 0 0 50px;
+    padding-bottom: 50px;
+}
+
+.titleinsert {
+    font-size: 18px;
+}
+
+.eacharticle {
+    max-width: 40%;
+    float: left;
+}
+
+img { 
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+
+
+.btn {
+    margin-right: 10px;
+    background-color: grey;
+}
+
+nav {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+a:hover, a:active, a {
+    text-decoration: none;
+    color: grey
+} 
+
+.nav {
+    background-color: black;
+}

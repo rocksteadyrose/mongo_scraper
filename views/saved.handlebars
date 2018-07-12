@@ -11,7 +11,7 @@
 
   <div class="jumbotron">
     <h1 class="display-4">MONGO SCRAPER</h1>
-    <p class="lead">CNN EDITION</p>
+    <p class="lead">HuffPost Dogs Edition</p>
     <hr class="my-4">
     <p class="lead">
 
@@ -20,24 +20,32 @@
 
 
   <div class="articles">
-    {{#if article}} {{#each article}} 
-    
-    <a href="https://www.huffingtonpost.com/{{this.link}}" target="_blank">{{this.title}}
-        <br>{{this.summary}} 
-        <div class="dodoimg">
+    {{#if article}} {{#each article}}
+
+    <br>
+    <div class="eacharticle">
+      <div class="text">
+        <a class="titleinsert" href="https://www.huffingtonpost.com/{{this.link}}" target="_blank">{{this.title}}
+          <h6 class="summaryinsert">{{this.summary}}</h6>
+      </div>
+      <div class="dodoimg">
         <img src="{{this.image}}">
       </div>
       </a>
-      
-    <button type="button" class="btn btn-success notesButton" data-id={{this._id}} data-toggle="modal" data-target="#notesModal{{this._id}}">Article Notes</button>
-    <button type="button" class="btn btn-success deleteArticleButton" data-id={{this._id}}>Delete From Saved</button>
 
+      <br>
+      <button type="button" class="btn btn-success notesButton" data-id={{this._id}} data-toggle="modal" data-target="#notesModal{{this._id}}">Article Notes</button>
+      <button type="button" class="btn btn-success deleteArticleButton" data-id={{this._id}}>Delete From Saved</button>
+    </div>
   </div>
+
   {{/each}} {{else}}
+
   <div class="noArticles">
     Uh, oh. Looks like we don't have any saved articles.
   </div>
   {{/if}}
 
 </div>
-{{#each article}} {{> notes }} {{/each}}
+
+{{> notes }}

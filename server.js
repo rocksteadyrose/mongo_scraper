@@ -22,20 +22,14 @@ app.engine("handlebars", exphbs({
   partialsDir: path.join(__dirname, "/views/layouts/partials")
 }));
 
-// We set this as the view engine bc Handlebars is controlling what the users see
 app.set("view engine", "handlebars");
 
-// Connect to the Mongo DB
 mongoose.connect("mongodb://localhost/mongo_scraper");
 
-// Start our server so that it can begin listening to client requests.
 app.listen(PORT, function () {
-  // Log (server-side) when our server has started
   console.log("Server listening on: http://localhost:" + PORT);
 });
 
-
-// Our scraping tools
 var cheerio = require("cheerio");
 var Note = require("./models/Note.js");
 var Article = require("./models/Article.js");
@@ -61,7 +55,7 @@ app.get("/saved", function (req, res) {
 
 
 app.get("/scrape", function (req, res) {
-  request("https://www.huffingtonpost.com/topic/funny-dogs", function (error, response, html) {
+  request("https://www.huffingtonpost.com/topic/dogs", function (error, response, html) {
     var $ = cheerio.load(html);
     $(".card__content").each(function (i, element) {
       var result = {};
@@ -153,7 +147,7 @@ app.post("/api/savearticle/:id", function (req, res) {
 });
 
 //Delete saved article
-app.post("/api/deletesavearticle/:id", function (req, res) {
+app.delete("/api/deletesavearticle/:id", function (req, res) {
   Article.findOneAndUpdate({ _id: req.params.id }, { "saved": false })
     .exec(function (err, doc) {
       if (err) {

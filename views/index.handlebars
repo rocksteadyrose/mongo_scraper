@@ -14,7 +14,6 @@
       <a class="btn btn-primary btn-lg scrapebutton" role="button" data-toggle="modal" data-target="#scraperModal">SCRAPE</a>
     </li>
 
-
     <div class="modal fade" id="scraperModal">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -28,13 +27,11 @@
         </div>
       </div>
     </div>
-
-
   </ul>
 
   <div class="jumbotron">
-    <h1 class="display-4">MONGO SCRAPER</h1>
-    <p class="lead">THE DODO EDITION</p>
+    <p class="display-4">MONGO SCRAPER</p>
+    <p class="lead">HuffPost Dogs Edition</p>
     <hr class="my-4">
     <p class="lead">
 
@@ -43,18 +40,27 @@
 
   <div class="articles">
     {{#if article}} {{#each article}}
-    <div class="dodoinfo">
-      <a href="https://www.huffingtonpost.com/{{this.link}}" target="_blank">{{this.title}}
-        <br>{{this.summary}}
-      <div class="dodoimg">
-        <img src="{{this.image}}"> </a>
+
+    <div class="eacharticle">
+      <div class="text">
+        <a class="titleinsert" href="https://www.huffingtonpost.com/{{this.link}}" target="_blank">{{this.title}}
+          <h6 class="summaryinsert">{{this.summary}}</h6>
       </div>
+      
+      <div class="dodoimg">
+        <img src="{{this.image}}">
+      </div>
+      </a>
+
       <br>
       <button type="button" class="btn btn-success saveButton" data-id={{this._id}}>Save Article</button>
       <button type="button" class="btn btn-success deleteButton" data-id={{this._id}}>Delete Article</button>
     </div>
+
   </div>
+
   {{/each}} {{else}}
+
   <div class="noArticles">
     Uh, oh. Looks like we don't have any new articles.
   </div>
