@@ -1,3 +1,5 @@
+
+//Scrape
 $(document).on("click", ".scrapebutton", function () {
     $.ajax({
         method: "GET",
@@ -12,7 +14,7 @@ $(document).on("click", ".scrapebutton", function () {
 $(document).on("click", ".saveButton", function () {
     var savedArticleId = $(this).attr("data-id");
     $.ajax({
-        method: "post",
+        method: "POST",
         url: "/api/savearticle/" + savedArticleId,
     })
         .done(function (data) {

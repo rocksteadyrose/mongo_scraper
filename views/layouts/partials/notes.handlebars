@@ -4,24 +4,44 @@
             <div class="modal-header">
                 <h5 class="modal-title">
                     Notes for article:</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">X</button>
             </div>
 
-            <span aria-hidden="true">&times;</span>
             <div class="modal-body">
-                {{#if this.note}} {{#each this.note}}
+
+
                 <div class="notessection">
-                    {{this.date}}
-                    <br> 
-                    {{this.body}}
-                    <button type="button" class="deleteNote" data-id={{this._id}}>X</button>
+
+                    {{#if this.note}} {{#each this.note}}
+
+                    <div class="eachnote">
+                        <strong>Written on:</strong>
+                        {{this.date}}
+                        <br>
+                        <strong>Note:</strong>
+                        <em>{{this.body}}</em>
+                        <br>
+                        <button type="button" class="deleteNote btn" data-id={{this._id}}>DELETE NOTE</button>
+                    </div>
+
+                    {{/each}}{{else}}
+
                 </div>
-                {{/each}}{{else}}
-                <p class="nonotessection">
+
+
+                <div class="nonotessection">
                     No notes yet
-                </p>
-                {{/if}} New Note
-                <textarea rows="4" cols="20" id="note{{this._id}}"></textarea>
+                </div>
+
+
+                {{/if}}
+
+                <div class="newnote">
+                    <strong>New Note</strong>
+                    <br>
+                    <textarea rows="4" cols="20" id="note{{this._id}}"></textarea>
+                </div>
+                
             </div>
 
             <div class="modal-footer">

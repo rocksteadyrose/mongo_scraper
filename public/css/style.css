@@ -10,6 +10,10 @@
     font-weight: normal;
 }
 
+.jumbotron {
+    background: url("/images/pawprintbackground.png") no-repeat fixed center;
+}
+
 .display-4 {
     font-family: "kschnauzer", Arial, Helvetica, sans-serif;
     font-size: 86px;
@@ -34,11 +38,17 @@ img {
 
 }
 
-
 .btn {
     margin-right: 10px;
+    background-color: hotpink;
+    text-decoration: none;
+    border: none;
+}
+
+.btn:hover {
     background-color: grey;
 }
+
 
 nav {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -46,9 +56,36 @@ nav {
 
 a:hover, a:active, a {
     text-decoration: none;
-    color: grey
+    color: grey;
 } 
+
+.btn:visited {
+    color: none;
+}
+
+a.nav-link.active {
+    color: grey;
+}
 
 .nav {
     background-color: black;
 }
+
+.nav li {
+    margin: 10px;
+}
+
+.notessection {
+    margin: 5px;
+}
+
+.newnote {
+    margin-top: 10px;
+}
+
+.eachnote {
+    margin-top: 10px;
+}
+
+
+

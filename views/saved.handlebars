@@ -2,10 +2,10 @@
 
   <ul class="nav">
     <li class="nav-item">
-      <a href="/" class="nav-link navbar-brand active">Mongo Scraper</a>
+      <a href="/" class="nav-link navbar-brand">Mongo Scraper</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link">Saved Articles</a>
+      <a class="nav-link active">Saved Articles</a>
     </li>
   </ul>
 
@@ -22,7 +22,6 @@
   <div class="articles">
     {{#if article}} {{#each article}}
 
-    <br>
     <div class="eacharticle">
       <div class="text">
         <a class="titleinsert" href="https://www.huffingtonpost.com/{{this.link}}" target="_blank">{{this.title}}
@@ -48,4 +47,4 @@
 
 </div>
 
-{{> notes }}
+{{#each article}} {{> notes }} {{/each}}

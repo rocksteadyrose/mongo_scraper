@@ -35,7 +35,7 @@ var Note = require("./models/Note.js");
 var Article = require("./models/Article.js");
 
 app.get("/", function (req, res) {
-  Article.find({ "saved": false }).limit(20).exec(function (error, data) {
+  Article.find({ "saved": false }).limit(35).exec(function (error, data) {
     var hbsObject = {
       article: data
     };
