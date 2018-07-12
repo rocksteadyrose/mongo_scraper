@@ -5,10 +5,10 @@
       <a href="/" class="nav-link navbar-brand active">Mongo Scraper</a>
     </li>
     <li class="nav-item">
-      <a href="/saved" class="nav-link">Saved Articles</a>
+      <a href="/saved" class="nav-link">Saved Barkicles</a>
     </li>
     <li class="nav-item">
-      <a class="btn btn-primary btn-lg deleteAllButton" role="button">Delete All Articles</a>
+      <a class="btn btn-primary btn-lg deleteAllButton" role="button">Delete All Barkicles</a>
     </li>
     <li class="nav-item">
       <a class="btn btn-primary btn-lg scrapebutton" role="button" data-toggle="modal" data-target="#scraperModal">SCRAPE</a>
@@ -17,7 +17,7 @@
     <div class="modal fade" id="scraperModal">
       <div class="modal-dialog">
         <div class="modal-content">
-          <div class="modal-header">Added new articles!
+          <div class="modal-header">Pawesome! Added new bark-icles!
 
             <button type="button" class="close" data-dismiss="modal">&times;</button>
           </div>
@@ -42,19 +42,20 @@
     {{#if article}} {{#each article}}
 
     <div class="eacharticle">
+
       <div class="text">
         <a class="titleinsert" href="https://www.huffingtonpost.com/{{this.link}}" target="_blank">{{this.title}}
           <h6 class="summaryinsert"><em>{{this.summary}}</em></h6>
       </div>
       
-      <div class="dodoimg">
-        <img src="{{this.image}}">
+      <div class="huffimg">
+        <img class="huffpic" src="{{this.image}}">
       </div>
       </a>
 
       <br>
-      <button type="button" class="btn btn-success saveButton" data-id={{this._id}}>Save Article</button>
-      <button type="button" class="btn btn-success deleteButton" data-id={{this._id}}>Delete Article</button>
+      <button type="button" class="btn btn-success saveButton" data-id={{this._id}}>Save Barkicle</button>
+      <button type="button" class="btn btn-success deleteButton" data-id={{this._id}}>Delete Barkicle</button>
     </div>
 
   </div>
@@ -62,7 +63,7 @@
   {{/each}} {{else}}
 
   <div class="noArticles">
-    Uh, oh. Looks like we don't have any new articles.
+    Woof. Looks like we don't have any new articles.
   </div>
   {{/if}}
 

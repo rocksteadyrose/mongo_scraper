@@ -5,13 +5,27 @@
 }
 
 @font-face {
-    font-family: "puppybellies";
-    src: url("../fonts/puppybellies.ttf");
+    font-family: "assistant";
+    src: url("../fonts/Assistant-Regular.ttf");
     font-weight: normal;
+}
+
+@font-face {
+    font-family: "assistantBold";
+    src: url("../fonts/Assistant-ExtraBold.ttf");
+    font-weight: bold;
+}
+
+body {
+    font-family: "assistant", Arial, Helvetica, sans-serif;
 }
 
 .jumbotron {
     background: url("/images/pawprintbackground.png") no-repeat fixed center;
+}
+
+.navbar-brand {
+    font-family: "assistantBold", Arial, Helvetica, sans-serif;
 }
 
 .display-4 {
@@ -20,17 +34,21 @@
 }
 
 .eacharticle {
-    margin: 0 0 0 50px;
-    padding-bottom: 50px;
+    padding: 0 40px 40px 40px;
+    width: 40%;
+    float: left;
+}
+
+.eacharticle .text {
+    width: 70%;
 }
 
 .titleinsert {
-    font-size: 18px;
+    font-size: 16px;
 }
 
-.eacharticle {
-    max-width: 40%;
-    float: left;
+.summaryinsert {
+    font-size: 14px;
 }
 
 img { 
@@ -73,10 +91,6 @@ a.nav-link.active {
 
 .nav li {
     margin: 10px;
-}
-
-.notessection {
-    margin: 5px;
 }
 
 .newnote {
