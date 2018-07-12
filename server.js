@@ -61,25 +61,25 @@ app.get("/saved", function (req, res) {
 
 
 app.get("/scrape", function (req, res) {
-  request("https://www.buzzfeed.com/animals?utm_term=.fnqwYnpjv#.wlPlD1yBE", function (error, response, html) {
+  request("https://www.huffingtonpost.com/topic/funny-dogs", function (error, response, html) {
     var $ = cheerio.load(html);
-    $(".story-card").each(function (i, element) {
+    $(".card__content").each(function (i, element) {
       var result = {};
 
       result.title = $(this)
-        .children(".sm-p2").children(".sm-pl05").children("a").children("h2")
+        .children(".card__details").children(".card__headlines").children(".card__headline").children(".card__link").children(".card__headline__text")
         .text();
 
       result.summary = $(this)
-        .children(".sm-p2").children(".sm-pl05").children("a").children("p")
-        .text();
+      .children(".card__details").children(".card__headlines").children(".card__description")
+      .text();
 
       result.image = $(this)
-        .children("a")
-        .attr("style")
+        .children("a").children(".card__image").children("img")
+        .attr("src")
 
       result.link = $(this)
-        .children(".sm-p2").children(".sm-pl05").children("a")
+      .children(".card__details").children(".card__headlines").children(".card__description").children("a")
         .attr("href")
 
       Article.create(result)
