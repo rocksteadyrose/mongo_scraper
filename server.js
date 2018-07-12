@@ -40,6 +40,7 @@ var cheerio = require("cheerio");
 var Note = require("./models/Note.js");
 var Article = require("./models/Article.js");
 
+//Handlebars 'get' unsaved articles - render index page
 app.get("/", function (req, res) {
   Article.find({ "saved": false }).limit(35).exec(function (error, data) {
     var hbsObject = {
@@ -49,6 +50,7 @@ app.get("/", function (req, res) {
   });
 });
 
+//Handlebars 'get' saved articles - render saved page
 app.get("/saved", function (req, res) {
   Article.find({ "saved": true }).populate("note").exec(function (error, article2) {
     var hbsObject = {
@@ -59,7 +61,7 @@ app.get("/saved", function (req, res) {
   });
 })
 
-
+//Scrape articles
 app.get("/scrape", function (req, res) {
   request("https://www.huffingtonpost.com/topic/dogs", function (error, response, html) {
     var $ = cheerio.load(html);
@@ -200,7 +202,6 @@ app.post("/api/savenote/:id", function (req, res) {
     }
   });
 });
-
 
 //Delete a note
 app.delete("/api/deletenote/:id", function (req, res) {
