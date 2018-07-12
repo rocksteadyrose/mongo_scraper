@@ -34,18 +34,32 @@
 
   <div class="jumbotron">
     <h1 class="display-4">MONGO SCRAPER</h1>
-    <p class="lead">CNN EDITION</p>
+    <p class="lead">THE DODO EDITION</p>
     <hr class="my-4">
     <p class="lead">
 
     </p>
   </div>
 
-
   <div class="articles">
-    {{#if article}} {{#each article}} {{this.title}} {{this.summary}} {{this.link}}
-    <button type="button" class="btn btn-success saveButton" data-id={{this._id}}>Save Article</button>
-    <button type="button" class="btn btn-success deleteButton" data-id={{this._id}}>Delete Article</button>
+    {{#if article}} {{#each article}}
+    <div class="dodoinfo">
+      <a href="http://www.buzzfeed.com{{this.link}}" target="_blank">{{this.title}}
+        <br>{{this.summary}} </a>
+        <div class="dodoplacement"></div>
+        <div class="dodoimg">
+          {{this.image}}
+           
+           
+          
+        </div>
+
+
+      <br>
+      <button type="button" class="btn btn-success saveButton" data-id={{this._id}}>Save Article</button>
+      <button type="button" class="btn btn-success deleteButton" data-id={{this._id}}>Delete Article</button>
+      
+    </div>
   </div>
   {{/each}} {{else}}
   <div class="noArticles">

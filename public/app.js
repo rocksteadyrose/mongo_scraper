@@ -3,9 +3,9 @@ $(document).on("click", ".scrapebutton", function () {
         method: "GET",
         url: "/scrape",
     })
-    .done(function (data) {
-        window.location = "/"
-    })
+        .done(function (data) {
+            window.location = "/"
+        })
 })
 
 //Save articles
@@ -26,9 +26,9 @@ $(document).on("click", ".deleteAllButton", function () {
         method: "DELETE",
         url: "/api/deletearticles/",
     })
-    .done(function (data) {
-        window.location = "/"
-    })
+        .done(function (data) {
+            window.location = "/"
+        })
 })
 
 //Delete an article
@@ -38,9 +38,9 @@ $(document).on("click", ".deleteButton", function () {
         method: "DELETE",
         url: "/api/deletearticle/" + deleteArticleId,
     })
-    .done(function (data) {
-        window.location = "/"
-    })
+        .done(function (data) {
+            window.location = "/"
+        })
 })
 
 //Delete a saved article
@@ -48,12 +48,12 @@ $(document).on("click", ".deleteArticleButton", function () {
     var deleteSavedArticleId = $(this).attr("data-id");
 
     $.ajax({
-        method: "post",
+        method: "DELETE",
         url: "/api/deletesavearticle/" + deleteSavedArticleId,
     })
-    .done(function (data) {
-        window.location = "/saved"
-    })
+        .done(function (data) {
+            window.location = "/saved"
+        })
 })
 
 //Save a note
@@ -66,12 +66,12 @@ $(document).on("click", ".saveNotesButton", function () {
         data: {
             text: $("#note" + newNoteId).val(),
             // created: Date.now()
-            }
-        }).done(function(data) {
-            console.log(data);
-            $("#note" + newNoteId).val("");
-            window.location = "/saved"
-        })
+        }
+    }).done(function (data) {
+        console.log(data);
+        $("#note" + newNoteId).val("");
+        window.location = "/saved"
+    })
 })
 
 //Delete a note
@@ -81,8 +81,8 @@ $(document).on("click", ".deleteNote", function () {
     $.ajax({
         method: "DELETE",
         url: "/api/deletenote/" + deleteNoteId,
-        }).done(function(data) {
-            window.location = "/saved"
-        })
+    }).done(function (data) {
+        window.location = "/saved"
+    })
 })
 

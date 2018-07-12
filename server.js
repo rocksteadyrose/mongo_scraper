@@ -11,7 +11,6 @@ var PORT = 3000;
 // Initialize Express
 var app = express();
 
-
 // Use morgan logger for logging requests
 app.use(logger("dev"));
 // Use body-parser for handling form submissions
@@ -62,22 +61,26 @@ app.get("/saved", function (req, res) {
 
 
 app.get("/scrape", function (req, res) {
-  request("https://www.thedodo.com/close-to-home", function (error, response, html) {
+  request("https://www.buzzfeed.com/animals?utm_term=.fnqwYnpjv#.wlPlD1yBE", function (error, response, html) {
     var $ = cheerio.load(html);
-    $(".standard-listing__image").each(function (i, element) {
+    $(".story-card").each(function (i, element) {
       var result = {};
 
       result.title = $(this)
-        .children("a").children(".standard-listing__caption").children(".standard-listing__title").children(".standard-listing__title-text")
+        .children(".sm-p2").children(".sm-pl05").children("a").children("h2")
         .text();
 
-        result.summary = $(this)
-        .children("a").children(".standard-listing__caption").children(".standard-listing__title").children(".standard-listing__description").children(".standard-listing__subtitle")
+      result.summary = $(this)
+        .children(".sm-p2").children(".sm-pl05").children("a").children("p")
         .text();
+
+      result.image = $(this)
+        .children("a")
+        .attr("style")
 
       result.link = $(this)
-        .children("a")
-        .attr("href");
+        .children(".sm-p2").children(".sm-pl05").children("a")
+        .attr("href")
 
       Article.create(result)
         .then(function (dbArticle) {
@@ -90,6 +93,7 @@ app.get("/scrape", function (req, res) {
     res.send("Scrape Complete");
   });
 });
+
 
 // Route for getting all Articles from the db
 app.get("/api/getarticles", function (req, res) {
