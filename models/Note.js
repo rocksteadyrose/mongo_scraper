@@ -10,6 +10,10 @@ var NoteSchema = new Schema({
   body: {
     type: String
 },
+    date: {
+        type: Date,
+        default: Date.now
+    },
 article: {
     type: Schema.Types.ObjectId,
     ref: "Article"

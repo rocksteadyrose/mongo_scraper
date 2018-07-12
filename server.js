@@ -177,6 +177,7 @@ app.get("/api/savenote/:id", function (req, res) {
 app.post("/api/savenote/:id", function (req, res) {
   var newNote = new Note({
     body: req.body.text,
+    date: req.body.created,
     article: req.params.id
   });
   console.log(req.body)

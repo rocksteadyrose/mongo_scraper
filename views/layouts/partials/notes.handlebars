@@ -9,24 +9,24 @@
 
             <span aria-hidden="true">&times;</span>
             <div class="modal-body">
-                 {{#if this.note}} {{#each this.note}}
-                <p class="notessection">
+                {{#if this.note}} {{#each this.note}}
+                <div class="notessection">
+                    {{this.date}}
+                    <br> 
                     {{this.body}}
                     <button type="button" class="deleteNote" data-id={{this._id}}>X</button>
-                </p>
+                </div>
                 {{/each}}{{else}}
                 <p class="nonotessection">
                     No notes yet
                 </p>
-                {{/if}} 
-              
-                New Note
+                {{/if}} New Note
                 <textarea rows="4" cols="20" id="note{{this._id}}"></textarea>
             </div>
 
             <div class="modal-footer">
                 <button type="button" class="btn saveNotesButton" data-id={{this._id}}>Save</button>
-                <button type="button" class="btn cancelButton" data-dismiss="modal" >Cancel</button>
+                <button type="button" class="btn cancelButton" data-dismiss="modal">Cancel</button>
             </div>
         </div>
     </div>

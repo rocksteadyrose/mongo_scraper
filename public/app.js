@@ -65,7 +65,7 @@ $(document).on("click", ".saveNotesButton", function () {
         url: "/api/savenote/" + newNoteId,
         data: {
             text: $("#note" + newNoteId).val(),
-            // created: Date.now()
+            created: new Date()
         }
     }).done(function (data) {
         console.log(data);

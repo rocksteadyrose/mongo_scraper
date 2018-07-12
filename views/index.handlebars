@@ -45,20 +45,13 @@
     {{#if article}} {{#each article}}
     <div class="dodoinfo">
       <a href="https://www.huffingtonpost.com/{{this.link}}" target="_blank">{{this.title}}
-        <br>{{this.summary}} </a>
-        <div class="dodoplacement"></div>
-        <div class="dodoimg">
-          <img src="{{this.image}}">
-           
-           
-          
-        </div>
-
-
+        <br>{{this.summary}}
+      <div class="dodoimg">
+        <img src="{{this.image}}"> </a>
+      </div>
       <br>
       <button type="button" class="btn btn-success saveButton" data-id={{this._id}}>Save Article</button>
       <button type="button" class="btn btn-success deleteButton" data-id={{this._id}}>Delete Article</button>
-      
     </div>
   </div>
   {{/each}} {{else}}

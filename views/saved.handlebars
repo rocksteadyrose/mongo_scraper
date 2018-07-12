@@ -20,7 +20,15 @@
 
 
   <div class="articles">
-    {{#if article}} {{#each article}} {{this.title}} {{this.summary}} {{this.link}}
+    {{#if article}} {{#each article}} 
+    
+    <a href="https://www.huffingtonpost.com/{{this.link}}" target="_blank">{{this.title}}
+        <br>{{this.summary}} 
+        <div class="dodoimg">
+        <img src="{{this.image}}">
+      </div>
+      </a>
+      
     <button type="button" class="btn btn-success notesButton" data-id={{this._id}} data-toggle="modal" data-target="#notesModal{{this._id}}">Article Notes</button>
     <button type="button" class="btn btn-success deleteArticleButton" data-id={{this._id}}>Delete From Saved</button>
 
