@@ -33,8 +33,15 @@ body {
     font-size: 86px;
 }
 
+html {
+    margin-bottom: 30px;
+}
+
+.jumbotron {
+    margin-bottom: -10px;
+}
+
 .eacharticle img {
-    /* padding: 0 40px 40px 40px; */
     width: 100%;
     float: left;
     height: auto;

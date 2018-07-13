@@ -8,7 +8,7 @@ module.exports = function (app) {
 
     //Handlebars 'get' unsaved articles - render index page
     app.get("/", function (req, res) {
-        Article.find({ saved: false }).sort({ _id: -1 }).limit(20).exec(function (error, data) {
+        Article.find({ saved: false }).sort({ _id: -1 }).limit(30).exec(function (error, data) {
             var hbsObject = {
                 article: data
             };
