@@ -1,4 +1,4 @@
-# mongo_scraper - HuffPost Dogs Edition
+# Mongo Scraper - HuffPost Dogs Edition
 
 View the completed site on Heroku <a href="http://rose-mongoscraper.herokuapp.com">here</a>.
 
