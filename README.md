@@ -1,6 +1,6 @@
 # Mongo Scraper - HuffPost Dogs Edition
 
-View the completed site on Heroku <a href="http://rose-mongoscraper.herokuapp.com" target="_blank">here</a>.
+View the completed site on Heroku <a href="http://rose-mongoscraper.herokuapp.com" target="blank">here</a>.
 
 Mong-Scraper is a web app that lets users view and leave comments on the latest (dog) news. Whenever a user visits this site, the app scrapes stories from HuffPost Dogs and display them for the user. Each scraped article is saved to the application database using Mongoose.
 
