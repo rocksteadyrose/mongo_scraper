@@ -9,10 +9,13 @@ Mongo Scraper is a web app that lets users view and leave comments on the latest
 
 HOW TO USE:
 
-* On the homepage, you can either hit SCRAPE to get new articles to add to the database, or you can view existing ones already on the site. You can also choose to delete all of the articles from the site.
-
-* ON THE MAIN PAGE: If you see an article you like, you can click it to read the whole story on HuffPost Dogs. 
-  * You can also hit SAVE BARKICLE to save it to the SAVED ARTICLES (Saved Barkicles) page, or DELETE BARKICLE to delete it from the page.
+* ON THE MAIN PAGE:
+ 
+ * You can either hit SCRAPE to get new articles to add to the database, or you can view existing ones already on the site. You can also choose to delete all of the articles from the site.
+ 
+ * If you see an article you like, you can click it to read the whole story on HuffPost Dogs. 
+ 
+ * You can also hit SAVE BARKICLE to save it to the SAVED ARTICLES (Saved Barkicles) page, or DELETE BARKICLE to delete it from the page.
 
 * ON THE SAVED BARKICLES PAGE: Here you can view all of the articles you've saved. You can also delete an article from this page, or add notes to each article.
 
