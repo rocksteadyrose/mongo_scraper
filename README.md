@@ -11,11 +11,9 @@ HOW TO USE:
 
 * **ON THE MAIN PAGE: 
 
-       * You can either hit SCRAPE to get new articles to add to the database, or you can view existing ones already on the site. You can also choose to delete all of the articles from the site.
- 
-      * If you see an article you like, you can click it to read the whole story on HuffPost Dogs. 
- 
-      * You can also hit SAVE BARKICLE to save it to the SAVED ARTICLES (Saved Barkicles) page, or DELETE BARKICLE to delete it from the page.
+  * You can either hit SCRAPE to get new articles to add to the database, or you can view existing ones already on the site. You can also choose to delete all of the articles from the site.
+  * If you see an article you like, you can click it to read the whole story on HuffPost Dogs.
+  * You can also hit SAVE BARKICLE to save it to the SAVED ARTICLES (Saved Barkicles) page, or DELETE BARKICLE to delete it from the page.
 
 * **ON THE SAVED BARKICLES PAGE: 
 
