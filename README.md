@@ -2,7 +2,7 @@
 
 View the completed site on Heroku <a href="http://rose-mongoscraper.herokuapp.com" target="blank">here</a>.
 
-Mong-Scraper is a web app that lets users view and leave comments on the latest (dog) news. Whenever a user visits this site, the app scrapes stories from HuffPost Dogs and display them for the user. Each scraped article is saved to the application database using Mongoose.
+Mong0 Scraper is a web app that lets users view and leave comments on the latest (dog) news. Whenever a user visits the app, it scrapes stories from HuffPost Dogs and display them for the user. Each scraped article is saved to the application database using Mongo + Mongoose.
 
 <img width="978" alt="screen shot 2018-07-13 at 6 52 59 pm" src="https://user-images.githubusercontent.com/34491285/42718590-ead83a26-86cf-11e8-92b3-e25bad33a72b.png">
 <img width="1005" alt="screen shot 2018-07-13 at 6 53 25 pm" src="https://user-images.githubusercontent.com/34491285/42718591-eaead4a6-86cf-11e8-9940-3e52b0c54dd2.png">
