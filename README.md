@@ -9,7 +9,7 @@ Mongo Scraper is a web app that lets users view and leave comments on the latest
 
 HOW TO USE:
 
-* **ON THE MAIN PAGE: 
+* **ON THE MAIN PAGE**: 
 
   * You can either hit SCRAPE to get new articles to add to the database, or you can view existing ones already on the site. You can also choose to delete all of the articles from the site.
   * If you see an article you like, you can click it to read the whole story on HuffPost Dogs.
